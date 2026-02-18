@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import React, { useEffect, useRef, useState, type JSX, type ReactNode } from "react";
+import React, { useEffect, useRef, useState, type JSX } from "react";
 
 /// Describes a single slide within a slideshow.
 export interface Slide {
