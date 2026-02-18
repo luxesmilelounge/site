@@ -21,6 +21,10 @@
     */
 }
 
+@utility no-scrollbar {
+  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
 .main {
     background-color: #e8e8e8;
 

@@ -36,7 +36,7 @@ function App() {
         <div>
           <Header pages={pages} />
 
-          <PaddedContainer className="py-6">
+          <div className="">
             <Routes>
               <Route path="/" element={<Home />} />
               {pages.map((page, id) => {
@@ -49,7 +49,7 @@ function App() {
                 );
               })}
             </Routes>
-          </PaddedContainer>
+          </div>
         </div>
         <Footer pages={pages}/>
       </BrowserRouter>
