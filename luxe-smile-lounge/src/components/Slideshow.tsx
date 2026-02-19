@@ -134,7 +134,7 @@ const Slideshow = (props: SlideshowProps) => {
           if (props.stopOnInteraction) restartAutoSlide();
         }}
         ref={slideshowRef}
-        className="scroll-smooth w-full h-110  flex flex-nowrap overflow-hidden relative"
+        className="scroll-smooth w-full h-110  flex flex-nowrap overflow-hidden relative shadow-black shadow-sm"
       >
         {props.slides.map((slide, index) => {
           return (

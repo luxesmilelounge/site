@@ -28,7 +28,7 @@ const Image = (props: ImageProps) => {
       break;
   }
 
-  const fadeInPx = props.fadeInPx || "100px";
+  const fadeInPx = props.fadeInPx || "50px";
   const x = props.fadeIn === "left" ? `-${fadeInPx}` : fadeInPx;
 
   return (
@@ -39,7 +39,6 @@ const Image = (props: ImageProps) => {
         boxShadow: "0px 3px 4px 2px rgba(0,0,0,.15)",
       }}
       whileInView={{ opacity: 1, x: "0px" }}
-      transition={{ type: "spring" }}
       whileHover={{ scale: 1.01, boxShadow: "0px 3px 4px 3px rgba(0,0,0,.2)" }}
       className="w-fit h-full group overflow-hidden rounded-lg"
     >

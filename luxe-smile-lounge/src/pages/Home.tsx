@@ -2,9 +2,10 @@ import { motion } from "motion/react";
 import Button from "../components/Button";
 import { PaddedContainer } from "../components/Containers";
 import Image from "../components/Image";
-import Slideshow, { type SlideProps, Slide } from "../components/Slideshow";
+import Slideshow, { Slide } from "../components/Slideshow";
 import PlaceHolder from "/placeholder.png";
 import SlidePlaceholder from "/slide.jpg";
+import { ServiceImage } from "../components/ServiceImage";
 
 const Home = () => {
   const mySlides = [
@@ -67,12 +68,16 @@ const Home = () => {
           ABOUT US
         </Button>
       </div>
-    </Slide>
+    </Slide>,
   ];
 
   return (
     <>
-      <Slideshow slides={mySlides} durationMs={12000} stopOnInteraction={true} />
+      <Slideshow
+        slides={mySlides}
+        durationMs={12000}
+        stopOnInteraction={true}
+      />
 
       <div className="flex flex-col gap-18">
         <PaddedContainer className="pt-18 flex flex-col gap-26">
@@ -106,6 +111,45 @@ const Home = () => {
         </PaddedContainer>
 
         <PaddedContainer className="py-18 flex flex-col gap-26 bg-sub-back">
+          <div className="flex flex-row gap-x-25">
+            <ServiceImage
+              link="/services"
+              service="SERVICE NEEDED"
+              src={PlaceHolder}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Vestibulum sed ultricies eros. Aenean suscipit ex lacinia volutpat
+              aliquet. Nullam a volutpat mi. Aenean molestie felis a sem
+              hendrerit lobortis. Cras eu tincidunt augue. Nunc vel neque a nisl
+              posuere accumsan. Ut tincidunt, diam vel commodo posuere, lacus
+              magna rhoncus enim, vitae fringilla augue justo ullamcorper dolor.
+            </ServiceImage>
+            <ServiceImage
+              link="/services"
+              service="SERVICE NEEDED"
+              src={PlaceHolder}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Vestibulum sed ultricies eros. Aenean suscipit ex lacinia volutpat
+              aliquet. Nullam a volutpat mi. Aenean molestie felis a sem
+              hendrerit lobortis. Cras eu tincidunt augue. Nunc vel neque a nisl
+              posuere accumsan. Ut tincidunt, diam vel commodo posuere, lacus
+              magna rhoncus enim, vitae fringilla augue justo ullamcorper dolor.
+            </ServiceImage>
+            <ServiceImage
+              link="/services"
+              service="SERVICE NEEDED"
+              src={PlaceHolder}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Vestibulum sed ultricies eros. Aenean suscipit ex lacinia volutpat
+              aliquet. Nullam a volutpat mi. Aenean molestie felis a sem
+              hendrerit lobortis. Cras eu tincidunt augue. Nunc vel neque a nisl
+              posuere accumsan. Ut tincidunt, diam vel commodo posuere, lacus
+              magna rhoncus enim, vitae fringilla augue justo ullamcorper dolor.
+            </ServiceImage>
+          </div>
+
           <div className="flex flex-row gap-40">
             <motion.div
               initial={{ x: "-50px", display: "hidden" }}
