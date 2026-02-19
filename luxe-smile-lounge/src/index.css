@@ -2,22 +2,20 @@
 
 /*Theme is known from Tailwind CSS V4*/
 @theme {
-    
-    /*primary off white background color*/
-    --color-back: #e8e8e8;
-    /*that dark blue background*/
-    --color-sub-back: #516a7b;
+  /*primary off white background color*/
+  --color-back: #e8e8e8;
+  /*that dark blue background*/
+  --color-sub-back: #516a7b;
 
+  /*off color black*/
+  --color-primary: #313131;
+  /*that yellowish color*/
+  --color-sub: #fff5d9;
 
-    /*off color black*/
-    --color-primary: #313131;
-    /*that yellowish color*/
-    --color-sub: #fff5d9;
+  --color-sub-hover: #e0d3ae;
 
-    --color-sub-hover: #e0d3ae;
-
-    --color-sub-blue: #597487;
-    /*
+  --color-sub-blue: #597487;
+  /*
         Other colors that are used are white and black
     */
 }
@@ -27,9 +25,24 @@
 }
 
 .main {
-    background-color: #e8e8e8;
+  background-color: #e8e8e8;
 
-    x: #e0d3ae;
-    width: 100%;
-    height: 100vh;
+  x: #e0d3ae;
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+

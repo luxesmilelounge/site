@@ -31,29 +31,35 @@ function App() {
   ];
 
   return (
-    <div className="main h-screen flex flex-col justify-between">
-      <BrowserRouter>
-        <div>
-          <Header pages={pages} />
+    <>
+      <style>
+        @import
+        url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+      </style>
+      <div className="main h-screen flex flex-col justify-between">
+        <BrowserRouter>
+          <div>
+            <Header pages={pages} />
 
-          <div className="">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              {pages.map((page, id) => {
-                return (
-                  <Route
-                    key={`route-${id}`}
-                    path={page.path}
-                    element={page.element}
-                  />
-                );
-              })}
-            </Routes>
+            <div className="">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                {pages.map((page, id) => {
+                  return (
+                    <Route
+                      key={`route-${id}`}
+                      path={page.path}
+                      element={page.element}
+                    />
+                  );
+                })}
+              </Routes>
+            </div>
           </div>
-        </div>
-        <Footer pages={pages}/>
-      </BrowserRouter>
-    </div>
+          <Footer pages={pages} />
+        </BrowserRouter>
+      </div>
+    </>
   );
 }
 

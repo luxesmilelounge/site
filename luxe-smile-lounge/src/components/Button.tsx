@@ -58,7 +58,7 @@ const Button = (props: ButtonProps) => {
             break;
     }
 
-  return <motion.button initial={{opacity: .7, boxShadow: "0px 3px 4px 2px rgba(0,0,0,.15)"}} transition={{...sizeTransition}} whileTap={{scale: 0.9,  boxShadow: "0px 1px 8px 4px rgba(0,0,0,.1)"}}  animate={{opacity: 1}} whileHover={{scale: 1.1, boxShadow: "0px 1px 4px 2px rgba(0,0,0,.22)"}} className={ `${variantDesign} ${sizeDesign} w-fit font-semibold cursor-pointer rounded-sm uppercase` } {...props}>{props.children}</motion.button>;
+  return <motion.button initial={{ opacity: .7, boxShadow: "0px 3px 4px 2px rgba(0,0,0,.15)"}} transition={{...sizeTransition}} whileTap={{scale: 0.9,  boxShadow: "0px 1px 8px 4px rgba(0,0,0,.1)"}}  whileInView={{opacity: 1}} whileHover={{scale: 1.1, boxShadow: "0px 1px 4px 2px rgba(0,0,0,.22)"}} className={ `${variantDesign} ${sizeDesign} w-fit font-semibold cursor-pointer rounded-sm uppercase` } {...props}>{props.children}</motion.button>;
 };
 
 export default Button;

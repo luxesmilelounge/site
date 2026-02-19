@@ -6,5 +6,5 @@ interface PaddedContainerProps {
 }
 
 export const PaddedContainer = (props: PaddedContainerProps) => {
-  return <div className={`bg-back px-24 ${props.className}`}>{props.children}</div>;
+  return <div className={`bg-back px-48 ${props.className}`}>{props.children}</div>;
 };
