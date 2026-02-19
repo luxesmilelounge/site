@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { motion, useMotionValue, useSpring } from "motion/react";
+import { useRef } from "react";
 
 export interface ImageProps {
   src: string;
@@ -10,6 +11,7 @@ export interface ImageProps {
 const Image = (props: ImageProps) => {
   const propSize = props.size || "md";
   let size;
+
   switch (propSize) {
     case "sm":
       size = "w-40 h-40";
@@ -24,23 +26,51 @@ const Image = (props: ImageProps) => {
       size = "w-120 h-120";
       break;
     case "full":
-      size = "w-full h-1full";
+      size = "w-full h-full";
       break;
   }
 
-  const fadeInPx = props.fadeInPx || "50px";
-  const x = props.fadeIn === "left" ? `-${fadeInPx}` : fadeInPx;
+  const fadeInPx = props.fadeInPx || "50";
+  const fadeX = props.fadeIn === "left" ? -Number(fadeInPx) : Number(fadeInPx);
+
+  // Mouse reactive motion
+  const ref = useRef<HTMLDivElement>(null);
+
+  const xMotion = useMotionValue(0);
+  const yMotion = useMotionValue(0);
+
+  const springX = useSpring(xMotion, { stiffness: 350, damping: 20 });
+  const springY = useSpring(yMotion, { stiffness: 350, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const distanceX = (e.clientX - centerX) / 15; // lower = heavier
+    const distanceY = (e.clientY - centerY) / 15;
+
+    xMotion.set(distanceX);
+    yMotion.set(distanceY);
+  };
+
+  const handleMouseLeave = () => {
+    xMotion.set(0);
+    yMotion.set(0);
+  };
 
   return (
     <motion.div
-      initial={{
-        opacity: 0.8,
-        x: x,
-        boxShadow: "0px 3px 4px 2px rgba(0,0,0,.15)",
-      }}
-      whileInView={{ opacity: 1, x: "0px" }}
-      whileHover={{ scale: 1.01, boxShadow: "0px 3px 4px 3px rgba(0,0,0,.2)" }}
-      className="w-fit h-full group overflow-hidden rounded-lg"
+      ref={ref}
+      style={{ x: springX, y: springY }}
+      initial={{ opacity: 0.8, x: fadeX }}
+      whileInView={{ opacity: 1, x: 0 }}
+      whileHover={{ scale: 1.02 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="w-fit h-full overflow-hidden rounded-lg shadow-md hover:shadow-lg transform-gpu will-change-transform"
     >
       <img className={`${size} object-cover`} src={props.src} />
     </motion.div>

@@ -18,6 +18,8 @@
   /*
         Other colors that are used are white and black
     */
+
+  --color-sub-back-grad: #3E5462;
 }
 
 @utility no-scrollbar {
@@ -45,4 +47,3 @@ p {
   font-optical-sizing: auto;
   font-style: normal;
 }
-

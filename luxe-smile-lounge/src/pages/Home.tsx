@@ -9,20 +9,21 @@ import { ServiceImage } from "../components/ServiceImage";
 
 const Home = () => {
   const mySlides = [
+    
     <Slide imgSrc={SlidePlaceholder}>
       <div className="flex flex-col justify-between h-full gap-12">
         <div className="flex flex-col gap-4">
-          <h1 className="text-sub text-4xl font-bold uppercase">
+          <motion.h1 initial={{y: "-25px"}} whileInView={{y: '0px'}} className="text-sub text-4xl font-bold uppercase">
             PRODUCT INFORMATION
-          </h1>
-          <p className="text-2xl text-white">
+          </motion.h1>
+          <motion.p initial={{x: "25px"}} whileInView={{x: '0px'}} className="text-2xl text-white">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
             sed ultricies eros. Aenean suscipit ex lacinia volutpat aliquet.
             Nullam a volutpat mi. Aenean molestie felis a sem hendrerit
             lobortis. Cras eu tincidunt augue. Nunc vel neque a nisl posuere
             accumsan. Ut tincidunt, diam vel commodo posuere, lacus magna
             rhoncus enim, vitae fringilla augue justo ullamcorper dolor.
-          </p>
+          </motion.p>
         </div>
         <Button variant="primary" size="large">
           ABOUT US
@@ -32,17 +33,17 @@ const Home = () => {
     <Slide imgSrc={SlidePlaceholder}>
       <div className="flex flex-col justify-between h-full gap-12">
         <div className="flex flex-col gap-4">
-          <h1 className="text-sub text-4xl font-bold uppercase">
+          <motion.h1 initial={{y: "-25px"}} whileInView={{y: '0px'}} className="text-sub text-4xl font-bold uppercase">
             PRODUCT INFORMATION
-          </h1>
-          <p className="text-2xl text-white">
+          </motion.h1>
+          <motion.p initial={{x: "25px"}} whileInView={{x: '0px'}} className="text-2xl text-white">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
             sed ultricies eros. Aenean suscipit ex lacinia volutpat aliquet.
             Nullam a volutpat mi. Aenean molestie felis a sem hendrerit
             lobortis. Cras eu tincidunt augue. Nunc vel neque a nisl posuere
             accumsan. Ut tincidunt, diam vel commodo posuere, lacus magna
             rhoncus enim, vitae fringilla augue justo ullamcorper dolor.
-          </p>
+          </motion.p>
         </div>
         <Button variant="primary" size="large">
           ABOUT US
@@ -52,23 +53,23 @@ const Home = () => {
     <Slide imgSrc={SlidePlaceholder}>
       <div className="flex flex-col justify-between h-full gap-12">
         <div className="flex flex-col gap-4">
-          <h1 className="text-sub text-4xl font-bold uppercase">
+          <motion.h1 initial={{y: "-25px"}} whileInView={{y: '0px'}} className="text-sub text-4xl font-bold uppercase">
             PRODUCT INFORMATION
-          </h1>
-          <p className="text-2xl text-white">
+          </motion.h1>
+          <motion.p initial={{x: "25px"}} whileInView={{x: '0px'}} className="text-2xl text-white">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
             sed ultricies eros. Aenean suscipit ex lacinia volutpat aliquet.
             Nullam a volutpat mi. Aenean molestie felis a sem hendrerit
             lobortis. Cras eu tincidunt augue. Nunc vel neque a nisl posuere
             accumsan. Ut tincidunt, diam vel commodo posuere, lacus magna
             rhoncus enim, vitae fringilla augue justo ullamcorper dolor.
-          </p>
+          </motion.p>
         </div>
         <Button variant="primary" size="large">
           ABOUT US
         </Button>
       </div>
-    </Slide>,
+    </Slide>
   ];
 
   return (
@@ -110,7 +111,7 @@ const Home = () => {
           </div>
         </PaddedContainer>
 
-        <PaddedContainer className="py-18 flex flex-col gap-26 bg-sub-back">
+        <PaddedContainer className="py-18 flex flex-col gap-26 bg-linear-to-r from-sub-back  to-sub-back-grad">
           <div className="flex flex-row gap-x-25">
             <ServiceImage
               link="/services"

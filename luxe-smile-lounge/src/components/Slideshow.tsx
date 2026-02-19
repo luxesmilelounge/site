@@ -39,7 +39,7 @@ const ScrollButton = (props: {
       whileInView={{ scale: 1 }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.9 }}
-      className="text-4xl text-white font-bold cursor-pointer"
+      className="text-4xl text-white font-bold cursor-pointer relative z-100"
       onClick={props.onClick}
       ref={props.ref}
     >
@@ -141,7 +141,7 @@ const Slideshow = (props: SlideshowProps) => {
             <div key={index} className="w-full shrink-0 relative">
               {slide}
 
-              <div className="absolute z-100 inset-0 flex justify-between items-center px-12">
+              <div className="absolute inset-0 flex justify-between items-center px-12">
                 <ScrollButton onClick={movePrev} buttonContent={<>{"<"}</>} />
                 <ScrollButton onClick={moveNext} buttonContent={<>{">"}</>} />
               </div>

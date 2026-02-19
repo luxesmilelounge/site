@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, scale } from "motion/react";
 import { Link } from "react-router-dom";
 
 export interface ServiceImageProps {
@@ -22,6 +22,11 @@ export const ServiceImage = (props: ServiceImageProps) => {
   const iconVariants = {
     initial: { height: "auto", opacity: 1, },
     hover: { height: 0, opacity: 0 },
+  };
+
+   const labelVariants = {
+    initial: { opacity: 0.7, scale: 1 },
+    hover: { opacity: 1, scale: 1.05 },
   };
 
   return (
@@ -52,10 +57,9 @@ export const ServiceImage = (props: ServiceImageProps) => {
           />
         </motion.div>
 
-        {/* Bottom Label Section */}
-        <div className="bg-sub w-full flex flex-col items-center border-t-2 border-black/10 font-semibold py-4 rounded-b-md z-10">
-          <p className="text-2xl">{props.service}</p>
-        </div>
+        <motion.div className="bg-sub w-full flex flex-col items-center border-t-2 border-black/10 font-semibold py-4 rounded-b-md z-10">
+          <motion.p variants={labelVariants} className="text-2xl">{props.service}</motion.p>
+        </motion.div>
       </motion.div>
     </Link>
   );
