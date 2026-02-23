@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import type { JSX } from "react";
 import Home from "./pages/Home";
 import { Footer, Header } from "./components/Templates";
-import { PaddedContainer } from "./components/Containers";
 import ContactPage from "./pages/Contact";
 import AboutUsPage from "./pages/AboutUs";
 import FaqPage from "./pages/FAQ";

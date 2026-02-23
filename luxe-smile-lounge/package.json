@@ -3,22 +3,22 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://BIGDummyHead.github.io/luxesmile-app",
+  "homepage": "https://luxesmilelounge.github.io/site/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "gh-pages -d build"
-    
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.2.1",
     "lucide-react": "^0.575.0",
     "motion": "^12.34.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.0",
-    "tailwindcss": "^4.1.18",
     "zod": "^4.3.6"
   },
   "devDependencies": {
