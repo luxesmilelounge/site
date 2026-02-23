@@ -4,7 +4,7 @@ import InstagramLogo from "/instagram.svg";
 import type { ReactNode } from "react";
 import type { Page } from "../App";
 import { PaddedContainer } from "./Containers";
-import { motion, stagger, type Transition } from "motion/react";
+import { motion } from "motion/react";
 
 const RouterLink = (props: {
   to: string;
@@ -126,9 +126,9 @@ export const Footer = (props: FooterProps) => {
     <PaddedContainer className="flex items-center justify-between bg-linear-to-r from-sub-back-grad  to-sub-back w-full h-40 py-24">
       <div className="flex gap-20 flex-1">
         <div className="flex flex-col flex-wrap h-36 items-start justify-start gap-x-8 gap-y-1">
-          {props.pages.map((page) => {
+          {props.pages.map((page, index) => {
             return (
-              <RouterLink className={"text-lg"} to={page.path}>
+              <RouterLink key={`${page.path}-${index}`} className={"text-lg"} to={page.path}>
                 {page.title}
               </RouterLink>
             );
@@ -140,11 +140,11 @@ export const Footer = (props: FooterProps) => {
       </div>
 
       <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 1 }}
-        >
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 1 }}
+      >
         <Link title="Return to home" to="/">
           <img className="w-60" src={Logo} />
         </Link>
