@@ -117,10 +117,8 @@ const AboutUs = () => {
 }
 
 /// Create a page property based on the Contact element.
-const AboutUsPage: Page = {
+export const AboutUsPage: Page = {
     element: <AboutUs />,
     title: "About Us",
     path: "/about-us"
 };
-
-export default AboutUsPage;

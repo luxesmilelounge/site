@@ -9,10 +9,8 @@ const TrustedTools = () => {
 }
 
 /// Create a page property based on the Contact element.
-const TrustedToolsPage: Page = {
+export const TrustedToolsPage: Page = {
     element: <TrustedTools/>,
     title: "Trusted Tools",
     path: "/trusted-tools"
 };
-
-export default TrustedToolsPage;

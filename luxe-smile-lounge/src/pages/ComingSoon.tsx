@@ -9,10 +9,8 @@ const ComingSoon = () => {
 }
 
 /// Create a page property based on the Contact element.
-const ComingSoonPage: Page = {
+export const ComingSoonPage: Page = {
     element: <ComingSoon/>,
     title: "Coming Soon",
     path: "/coming-soon"
 };
-
-export default ComingSoonPage;

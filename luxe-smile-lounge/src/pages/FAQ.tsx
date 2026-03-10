@@ -207,10 +207,8 @@ const faqs: FaqItem[] = [
 
 
 /// Create a page property based on the Contact element.
-const FaqPage: Page = {
+export const FaqPage: Page = {
     element: <Faq items={faqs} />,
     title: "FAQ",
     path: "/faq"
 };
-
-export default FaqPage;

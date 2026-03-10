@@ -55,10 +55,8 @@ const Services = () => {
 }
 
 /// Create a page property based on the Contact element.
-const ServicesPage: Page = {
+export const ServicesPage: Page = {
     element: <Services />,
     title: "Services",
     path: "/services"
 };
-
-export default ServicesPage;

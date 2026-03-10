@@ -7,6 +7,7 @@ import { useState } from "react";
 import { CircleQuestionMark, Contact2, Info, Mail, Phone } from "lucide-react";
 import Button from "../components/Button";
 import { TextFormItem } from "../components/formItems";
+import useFormspree from "../hooks/useFormspree";
 
 const ContactInfo = z.object({
     name: z.string().nonempty("Please provide your name"),
@@ -35,10 +36,9 @@ const Contact = () => {
         view: { opacity: 1, x: 0 }
     }
 
-    const [isSubmitted, setIsSubmitted] = useState(false);
-
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [errorMessage, setErrorMessage] = useState('');
+    const formSpree = useFormspree<ContactInfo>("xjgepjjy");
 
     const contactFormSubmit = (formData: FormData) => {
         //phone, name, email, reason
@@ -49,27 +49,16 @@ const Contact = () => {
             reason: formData.get('reason')?.toString()
         };
 
-        const sendForm = async (contactInfo: ContactInfo) => {
-            const response = await fetch("https://formspree.io/f/xjgepjjy", {
-                method: 'POST',
-                body: JSON.stringify(contactInfo),
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
 
-            if (!response.ok) {
-                setErrorMessage('Failed to submit form!');
-                return;
-            }
-
-            setIsSubmitted(true);
-        }
 
         try {
             const contactInfo = ContactInfo.parse(info);
             setErrors({});
-            sendForm(contactInfo);
+            formSpree.send(contactInfo).then((req) => {
+                if (req && !req.ok) {
+                    setErrorMessage("Failed to submit form");
+                }
+            });
         }
         catch (error) {
             if (error instanceof z.ZodError) {
@@ -102,7 +91,7 @@ const Contact = () => {
                         className="flex flex-col gap-4 pb-12">
 
 
-                        {isSubmitted ?
+                        {formSpree.isSubmitted ?
                             <div className="flex flex-col w-full items-center">
                                 <motion.div
                                     initial={{ y: 100, opacity: 0 }}
@@ -137,10 +126,10 @@ const Contact = () => {
                                 </form>
 
                                 <motion.div
-                                initial={{opacity: 0}}
-                                animate={{opacity: 1}}
-                                
-                                className="flex flex-col gap-4 basis-1/4 bg-white/70 rounded-md h-fit p-4">
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+
+                                    className="flex flex-col gap-4 basis-1/4 bg-white/70 rounded-md h-fit p-4">
                                     <h1 className="text-3xl font-bold text-primary">Contact Info</h1>
                                     <div className="flex gap-4 items-center justify-start">
                                         <div className="bg-sub-back rounded-full p-1">
@@ -171,10 +160,8 @@ const Contact = () => {
 }
 
 /// Create a page property based on the Contact element.
-const ContactPage: Page = {
+export const ContactPage: Page = {
     element: <Contact />,
     title: "Contact Us",
     path: "/contact-us"
 };
-
-export default ContactPage;

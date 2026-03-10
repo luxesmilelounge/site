@@ -3,13 +3,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import type { JSX } from "react";
 import Home from "./pages/Home";
 import { Footer, Header } from "./components/Templates";
-import ContactPage from "./pages/Contact";
-import AboutUsPage from "./pages/AboutUs";
-import FaqPage from "./pages/FAQ";
-import ServicesPage from "./pages/Services";
-import TrustedToolsPage from "./pages/TrustedTools";
-import ComingSoonPage from "./pages/ComingSoon";
-import ConsentFormsPage from "./pages/ConsentForms";
+import { ContactPage } from "./pages/Contact";
+import { AboutUsPage } from "./pages/AboutUs";
+import { FaqPage } from "./pages/FAQ";
+import { ServicesPage } from "./pages/Services";
+import { TrustedToolsPage } from "./pages/TrustedTools";
+import { ComingSoonPage } from "./pages/ComingSoon";
+import { ConsentFormsPage } from "./pages/ConsentForms";
 
 export interface Page {
   element: JSX.Element;
