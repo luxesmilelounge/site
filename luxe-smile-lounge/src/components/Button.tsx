@@ -1,28 +1,28 @@
 import { type HTMLMotionProps, motion } from "motion/react";
 import type { ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 
 //button properties
 export interface ButtonProps extends HTMLMotionProps<'button'> {
     variant?: "primary" | "secondary";
     size?: 'small' | 'medium' | 'large' | 'xl';
     children: ReactNode;
+    href?: string;
 }
 
 const Button = (props: ButtonProps) => {
 
-    if(!props.size){
-    }
-
-    if (!props.variant) {
+    const navigate = useNavigate();
+    const clicked = () => {
+        if (props.href) {
+            navigate(props.href);
+        }
     }
 
     const size = props.size || 'medium';
     const variant = props.variant || 'primary';
 
     let sizeDesign;
-
-   
-
     switch (size) {
         case 'small':
             sizeDesign = 'px-12 py-2 text-md';
@@ -50,7 +50,7 @@ const Button = (props: ButtonProps) => {
             break;
     }
 
-  return <motion.button initial={{ opacity: .7, boxShadow: "0px 3px 4px 2px rgba(0,0,0,0)", y:'25px'}}  whileTap={{scale: 0.95,  boxShadow: "0px 1px 6px 5px rgba(0,0,0,.05)"}}  whileInView={{opacity: 1, y: "0px"}} whileHover={{scale: 1.05, boxShadow: "0px 1px 4px 2px rgba(0,0,0,.06)"}} className={ `${variantDesign} ${sizeDesign} w-fit font-semibold cursor-pointer rounded-sm uppercase` } {...props}>{props.children}</motion.button>;
+  return <motion.button onClick={clicked} initial={{ opacity: .7, boxShadow: "0px 3px 4px 2px rgba(0,0,0,0)", y:'25px'}}  whileTap={{scale: 0.95,  boxShadow: "0px 1px 6px 5px rgba(0,0,0,.05)"}}  whileInView={{opacity: 1, y: "0px"}} whileHover={{scale: 1.05, boxShadow: "0px 1px 4px 2px rgba(0,0,0,.06)"}} className={ `${variantDesign} ${sizeDesign} w-fit font-semibold cursor-pointer rounded-sm uppercase` } {...props}>{props.children}</motion.button>;
 };
 
 export default Button;

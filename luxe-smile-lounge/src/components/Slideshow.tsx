@@ -4,20 +4,38 @@ import { PaddedContainer } from "./Containers";
 
 export interface SlideProps {
   children: React.ReactNode;
-  imgSrc?: string;
+  itemSrc?: string;
+  isVideo?: boolean;
 }
 
 export const Slide = (props: SlideProps) => {
   return (
-      <div className="min-w-full h-full bg-transparent relative">
-        <div className="bg-black/60 min-w-full  min-h-full absolute z-10">
-          <PaddedContainer className="absolute bg-transparent py-20">
-            {props.children}
-          </PaddedContainer>
-        </div>
-        <img src={props.imgSrc} className="w-full h-full object-cover" />
+    <div className="min-w-full h-full bg-transparent relative">
+      <div className="bg-black/60 min-w-full  min-h-full absolute z-10">
+        <PaddedContainer className="absolute bg-transparent py-20">
+          {props.children}
+        </PaddedContainer>
       </div>
-    );
+      {props.isVideo ? (
+        <>
+          <div className="relative w-screen h-screen overflow-hidden">
+            <video
+              className="absolute inset-0 w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src={props.itemSrc} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </>
+      ) : (
+        <img src={props.itemSrc} className="w-full h-full object-cover" />
+      )}
+    </div>
+  );
 };
 
 export interface SlideshowProps {
@@ -141,10 +159,12 @@ const Slideshow = (props: SlideshowProps) => {
             <div key={index} className="w-full shrink-0 relative">
               {slide}
 
-              <div className="absolute inset-0 flex justify-between items-center px-12">
-                <ScrollButton onClick={movePrev} buttonContent={<>{"<"}</>} />
-                <ScrollButton onClick={moveNext} buttonContent={<>{">"}</>} />
-              </div>
+              {props.slides.length > 1 && (
+                <div className="absolute inset-0 flex justify-between items-center px-12">
+                  <ScrollButton onClick={movePrev} buttonContent={<>{"<"}</>} />
+                  <ScrollButton onClick={moveNext} buttonContent={<>{">"}</>} />
+                </div>
+              )}
             </div>
           );
         })}

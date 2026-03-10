@@ -35,6 +35,10 @@ function App() {
         @import
         url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
       </style>
+      <style>
+        @import
+        url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+      </style>
       <div className="main h-screen flex flex-col justify-between">
         <BrowserRouter>
           <div>

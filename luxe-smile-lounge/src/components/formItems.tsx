@@ -50,9 +50,9 @@ export const InputWrapper = (props: InputWrapperItems) => {
                     props.error
                     &&
                     <motion.div
-                        initial={{ opacity: 0, x: -50, height: 0 }}
-                        animate={{ opacity: 1, x: 0, height: 'auto' }}
-                        exit={{ opacity: 0, x: 50, height: 0 }}
+                        initial={{ opacity: 0, x: -25 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 25}}
                         className="bg-red-200 w-fit px-3 py-1.5 flex gap-4 shadow-sm rounded-sm mb-4"
                     >
                         <Info className="text-red-600" />

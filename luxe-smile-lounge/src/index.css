@@ -19,7 +19,7 @@
         Other colors that are used are white and black
     */
 
-  --color-sub-back-grad: #3E5462;
+  --color-sub-back-grad: #3e5462;
 }
 
 @utility no-scrollbar {
@@ -35,15 +35,21 @@
   overflow-x: hidden;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-a,
-p {
+h1,h2,h3,h4,h5,h6 {
+  font-family: "League Gothic", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  letter-spacing: 3px;
+  font-size: 3rem;
+}
+
+
+html, body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
-  font-style: normal;
+  font-weight: 400;
+  font-style: normal !important;
+  letter-spacing: normal;
 }
