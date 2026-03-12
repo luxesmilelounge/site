@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import type { JSX } from "react";
+import { useRef, type JSX } from "react";
 import Home from "./pages/Home";
 import { Footer, Header } from "./components/Templates";
 import { ContactPage } from "./pages/Contact";
@@ -29,6 +29,8 @@ function App() {
     ContactPage,
   ];
 
+  const ref = useRef<HTMLDivElement>(null);
+
   return (
     <>
       <style>
@@ -39,12 +41,12 @@ function App() {
         @import
         url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
       </style>
-      <div className="main h-screen flex flex-col justify-between">
+      <div ref={ref} className="main h-screen flex flex-col justify-between">
         <BrowserRouter>
           <div>
-            <Header pages={pages} />
+            <Header scrollRef={ref} pages={pages} />
 
-            <div className="">
+            <div className="mt-28">
               <Routes>
                 <Route path="/" element={<Home />} />
                 {pages.map((page, id) => {

@@ -19,20 +19,21 @@ export const Slide = (props: SlideProps) => {
       {props.isVideo ? (
         <>
           <div className="relative w-screen h-screen overflow-hidden">
-            <video
+            <motion.video
               className="absolute inset-0 w-full h-full object-cover"
               autoPlay
               muted
               loop
               playsInline
+              initial={{opacity: 0}} whileInView={{opacity:1}}
             >
               <source src={props.itemSrc} type="video/mp4" />
               Your browser does not support the video tag.
-            </video>
+            </motion.video>
           </div>
         </>
       ) : (
-        <img src={props.itemSrc} className="w-full h-full object-cover" />
+        <motion.img initial={{opacity: 0}} whileInView={{opacity:1}} src={props.itemSrc} className="w-full h-full object-cover" />
       )}
     </div>
   );
@@ -147,7 +148,7 @@ const Slideshow = (props: SlideshowProps) => {
 
   return (
     <>
-      <div
+      <motion.div
         onMouseOver={() => {
           if (props.stopOnInteraction) restartAutoSlide();
         }}
@@ -156,19 +157,19 @@ const Slideshow = (props: SlideshowProps) => {
       >
         {props.slides.map((slide, index) => {
           return (
-            <div key={index} className="w-full shrink-0 relative">
+            <motion.div  key={index} className="w-full shrink-0 relative">
               {slide}
 
               {props.slides.length > 1 && (
-                <div className="absolute inset-0 flex justify-between items-center px-12">
+                <motion.div className="absolute inset-0 flex justify-between items-center px-12">
                   <ScrollButton onClick={movePrev} buttonContent={<>{"<"}</>} />
                   <ScrollButton onClick={moveNext} buttonContent={<>{">"}</>} />
-                </div>
+                </motion.div>
               )}
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </>
   );
 };

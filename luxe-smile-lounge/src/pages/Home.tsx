@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, stagger, type Variants } from "motion/react";
 import Button from "../components/Button";
 import { PaddedContainer } from "../components/Containers";
 import Image from "../components/Image";
@@ -28,7 +28,7 @@ const Home = () => {
           <motion.p
             initial={{ x: "25px" }}
             whileInView={{ x: "0px" }}
-            className="text-2xl text-white"
+            className="text-2xl text-white w-3/4"
           >
             Welcome to Luxe Smile Lounge, where elevated aesthetics meet expert
             care. We specialize in modern smile enhancements designed to help
@@ -41,16 +41,81 @@ const Home = () => {
         </Button>
       </div>
     </Slide>,
-    
+    <Slide itemSrc={BookSmile} isVideo={true}>
+      <div className="flex flex-col justify-between h-full gap-12">
+        <div className="flex flex-col gap-4">
+          <motion.h1
+            initial={{ y: "-25px" }}
+            whileInView={{ y: "0px" }}
+            className="text-sub text-4xl font-bold uppercase"
+          >
+            Luxe Smile Lounge
+          </motion.h1>
+          <motion.p
+            initial={{ x: "25px" }}
+            whileInView={{ x: "0px" }}
+            className="text-2xl text-white w-3/4"
+          >
+            Welcome to Luxe Smile Lounge, where elevated aesthetics meet expert
+            care. We specialize in modern smile enhancements designed to help
+            you look and feel your absolute best— in the comfort of your own
+            home or at our lounge.
+          </motion.p>
+        </div>
+        <Button href="contact-us" variant="primary" size="large">
+          Get In Touch
+        </Button>
+      </div>
+    </Slide>,
+    <Slide itemSrc={BookSmile} isVideo={true}>
+      <div className="flex flex-col justify-between h-full gap-12">
+        <div className="flex flex-col gap-4">
+          <motion.h1
+            initial={{ y: "-25px" }}
+            whileInView={{ y: "0px" }}
+            className="text-sub text-4xl font-bold uppercase"
+          >
+            Luxe Smile Lounge
+          </motion.h1>
+          <motion.p
+            initial={{ x: "25px" }}
+            whileInView={{ x: "0px" }}
+            className="text-2xl text-white w-3/4"
+          >
+            Welcome to Luxe Smile Lounge, where elevated aesthetics meet expert
+            care. We specialize in modern smile enhancements designed to help
+            you look and feel your absolute best— in the comfort of your own
+            home or at our lounge.
+          </motion.p>
+        </div>
+        <Button href="contact-us" variant="primary" size="large">
+          Get In Touch
+        </Button>
+      </div>
+    </Slide>,
   ];
+
+  const parentServiceImgVariant: Variants = {
+    init: {},
+    view: {
+      transition: {
+        delayChildren: stagger(0.2),
+      },
+    },
+  };
+
+  const serviceImgVariant: Variants = {
+    init: { opacity: 0, y: 50, x: -25 },
+    view: { opacity: 1, y: 0 },
+  };
 
   return (
     <>
-      <Slideshow
-        slides={mySlides}
-        durationMs={12000}
-        stopOnInteraction={true}
-      />
+        <Slideshow
+          slides={mySlides}
+          durationMs={12000}
+          stopOnInteraction={true}
+        />
 
       <div className="flex flex-col gap-18">
         <PaddedContainer className="pt-18 flex flex-col gap-26">
@@ -83,48 +148,59 @@ const Home = () => {
         </PaddedContainer>
 
         <PaddedContainer className="py-18 flex flex-col gap-26 bg-linear-to-r from-sub-back  to-sub-back-grad">
-          <div className="flex flex-row gap-x-25">
-            <ServiceImage
-              link="/services"
-              service="GEM PLACEMENT"
-              src={GemService}
-            >
-              Tooth gem placement is a quick, non-invasive cosmetic service that
-              adds a small sparkling gem to the surface of your tooth for a
-              unique and stylish look. The gem is carefully bonded using a safe
-              dental adhesive—no drilling or damage to the tooth is required.
-              The process typically takes about 10–15 minutes and can last for
-              weeks or even months with proper care.
-            </ServiceImage>
+          <motion.div
+            variants={parentServiceImgVariant}
+            initial="init"
+            whileInView="view"
+            className="flex flex-row gap-x-25"
+          >
+            <motion.div variants={serviceImgVariant}>
+              <ServiceImage
+                link="/services"
+                service="GEM PLACEMENT"
+                src={GemService}
+              >
+                Tooth gem placement is a quick, non-invasive cosmetic service
+                that adds a small sparkling gem to the surface of your tooth for
+                a unique and stylish look. The gem is carefully bonded using a
+                safe dental adhesive—no drilling or damage to the tooth is
+                required. The process typically takes about 10–15 minutes and
+                can last for weeks or even months with proper care.
+              </ServiceImage>
+            </motion.div>
 
-            <ServiceImage
-              link="/services"
-              service="TEETH WHITENING"
-              src={PlaceHolder}
-            >
-              Teeth whitening is a cosmetic treatment designed to brighten and
-              enhance your smile by removing stains and discoloration from the
-              teeth. Using professional-grade whitening products, the process
-              safely lifts years of staining caused by coffee, tea, wine, and
-              everyday habits. The treatment is quick, comfortable, and can
-              noticeably lighten teeth several shades in a single session,
-              leaving you with a cleaner, more radiant smile.
-            </ServiceImage>
+            <motion.div variants={serviceImgVariant}>
+              <ServiceImage
+                link="/services"
+                service="TEETH WHITENING"
+                src={PlaceHolder}
+              >
+                Teeth whitening is a cosmetic treatment designed to brighten and
+                enhance your smile by removing stains and discoloration from the
+                teeth. Using professional-grade whitening products, the process
+                safely lifts years of staining caused by coffee, tea, wine, and
+                everyday habits. The treatment is quick, comfortable, and can
+                noticeably lighten teeth several shades in a single session,
+                leaving you with a cleaner, more radiant smile.
+              </ServiceImage>
+            </motion.div>
 
-            <ServiceImage
-              link="/services"
-              service="VIDEO RECORDING"
-              src={PlaceHolder}
-            >
-              Video recording of the procedure allows you to capture your smile
-              transformation from start to finish. During the service, the
-              process of tooth gem placement and teeth whitening is
-              professionally recorded, highlighting each step and the final
-              results. This service is perfect for creating memorable content
-              for personal keepsakes or social media, showcasing your smile
-              upgrade in a clear and engaging way.
-            </ServiceImage>
-          </div>
+            <motion.div variants={serviceImgVariant}>
+              <ServiceImage
+                link="/services"
+                service="VIDEO RECORDING"
+                src={PlaceHolder}
+              >
+                Video recording of the procedure allows you to capture your
+                smile transformation from start to finish. During the service,
+                the process of tooth gem placement and teeth whitening is
+                professionally recorded, highlighting each step and the final
+                results. This service is perfect for creating memorable content
+                for personal keepsakes or social media, showcasing your smile
+                upgrade in a clear and engaging way.
+              </ServiceImage>
+            </motion.div>
+          </motion.div>
 
           <div className="flex flex-row gap-40">
             <motion.div

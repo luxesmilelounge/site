@@ -39,8 +39,8 @@ const Image = (props: ImageProps) => {
   const xMotion = useMotionValue(0);
   const yMotion = useMotionValue(0);
 
-  const springX = useSpring(xMotion, { stiffness: 350, damping: 20 });
-  const springY = useSpring(yMotion, { stiffness: 350, damping: 20 });
+  const springX = useSpring(xMotion, { stiffness: 300, damping: 40 });
+  const springY = useSpring(yMotion, { stiffness: 300, damping: 40 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = ref.current?.getBoundingClientRect();
@@ -49,11 +49,11 @@ const Image = (props: ImageProps) => {
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
-    const distanceX = (e.clientX - centerX) / 15; // lower = heavier
-    const distanceY = (e.clientY - centerY) / 15;
+    const distanceX = (e.clientX - centerX) / 15; 
+    const distanceY = (e.clientY - centerY) / 10;
 
-    xMotion.set(distanceX);
-    yMotion.set(distanceY);
+    xMotion.set(-distanceX);
+    yMotion.set(-distanceY);
   };
 
   const handleMouseLeave = () => {
@@ -64,13 +64,13 @@ const Image = (props: ImageProps) => {
   return (
     <motion.div
       ref={ref}
-      style={{ x: springX, y: springY }}
+      style={{  x: springX, y: springY }}
       initial={{ opacity: 0.8, x: fadeX }}
       whileInView={{ opacity: 1, x: 0 }}
       whileHover={{ scale: 1.02 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="w-fit h-full overflow-hidden rounded-lg shadow-md hover:shadow-lg transform-gpu will-change-transform"
+      className="w-fit h-full overflow-hidden rounded-lg shadow-md hover:shadow-lg transform-gpu will-change-transform "
     >
       <img className={`${size} object-cover`} src={props.src} />
     </motion.div>

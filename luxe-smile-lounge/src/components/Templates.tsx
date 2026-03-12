@@ -1,23 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "/logo.png";
 import InstagramLogo from "/instagram.svg";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import type { Page } from "../App";
 import { PaddedContainer } from "./Containers";
-import { motion } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+} from "motion/react";
 
 const RouterLink = (props: {
   to: string;
   children: ReactNode;
   className?: string;
+  currentPath: string;
 }) => {
+  const currentlyOnPage = props.to === props.currentPath;
+
   return (
     <div
       className={`group text-xl text-sub transition-all duration-300 hover:text-sub-hover flex flex-col gap-0 items-center ${props.className}`}
     >
       <Link to={props.to}>{props.children}</Link>
 
-      <div className="group-hover:border-sub group-hover:w-full transition-all duration-300 w-0 border border-transparent "></div>
+      {currentlyOnPage ? (
+        <div className="border-sub w-full transition-all duration-300 border "></div>
+      ) : (
+        <div className="group-hover:border-sub group-hover:w-full transition-all duration-300 w-0 border border-transparent "></div>
+      )}
     </div>
   );
 };
@@ -50,6 +62,7 @@ export const SocialMedia = (props: {
 
 export interface HeaderProps {
   pages: Page[];
+  scrollRef: React.RefObject<HTMLElement | null>;
 }
 
 export interface FooterProps {
@@ -71,40 +84,73 @@ export const Header = (props: HeaderProps) => {
     show: { x: 0, opacity: 1 },
   };
 
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const { scrollY } = useScroll({
+    container: props.scrollRef,
+  });
+  const [isHidden, setIsHidden] = useState<boolean>(false);
+  const [isFixed, setIsFixed] = useState<boolean>(false);
+
+  useMotionValueEvent(scrollY, "change", (current) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    const fixed = current > 100;
+    setIsFixed(fixed);
+    setIsHidden(current > previous && fixed);
+  });
   return (
-    <PaddedContainer className="bg-linear-to-r from-sub-back-grad  to-sub-back w-full h-24 justify-between flex items-center py-14">
-      <div className="flex items-center justify-baseline gap-24">
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 1 }}
-        >
-          <Link title="Return to home" to="/">
-            <img className="w-40" src={Logo} />
-          </Link>
-        </motion.div>
+    <AnimatePresence>
+      <motion.div
+        className="w-screen z-1000"
+        animate={{
+          y: isHidden ? "-100%" : "0%",
+          boxShadow: isFixed
+            ? "0px 8px 20px rgba(0,0,0,0.1)"
+            : "0px 0px 0px rgba(0,0,0,0)",
+        }}
+        style={{
+          position: "fixed"
+        }}
+        transition={{ duration: 0.25 }}
+      >
+        <PaddedContainer className="bg-linear-to-r from-sub-back-grad  to-sub-back w-full h-24 justify-between flex items-center py-14">
+          <div className="flex items-center justify-baseline gap-24">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 1 }}
+            >
+              <Link title="Return to home" to="/">
+                <img className="w-40" src={Logo} />
+              </Link>
+            </motion.div>
 
-        <motion.div>
-          <motion.nav
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-            className="flex gap-12"
-          >
-            {props.pages.map((page) => (
-              <motion.div key={page.path} variants={itemVariants}>
-                <RouterLink to={page.path}>{page.title}</RouterLink>
-              </motion.div>
-            ))}
-          </motion.nav>
-        </motion.div>
-      </div>
+            <motion.div>
+              <motion.nav
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                className="flex gap-12"
+              >
+                {props.pages.map((page) => (
+                  <motion.div key={page.path} variants={itemVariants}>
+                    <RouterLink currentPath={currentPath} to={page.path}>
+                      {page.title}
+                    </RouterLink>
+                  </motion.div>
+                ))}
+              </motion.nav>
+            </motion.div>
+          </div>
 
-      <div>
-        <SocialMedia type="instagram" />
-      </div>
-    </PaddedContainer>
+          <div>
+            <SocialMedia type="instagram" />
+          </div>
+        </PaddedContainer>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
@@ -122,13 +168,21 @@ const Copyright = () => {
 };
 
 export const Footer = (props: FooterProps) => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
     <PaddedContainer className="flex items-center justify-between bg-linear-to-r from-sub-back-grad  to-sub-back w-full h-40 py-24">
       <div className="flex gap-20 flex-1">
         <div className="flex flex-col flex-wrap h-36 items-start justify-start gap-x-8 gap-y-1">
           {props.pages.map((page, index) => {
             return (
-              <RouterLink key={`${page.path}-${index}`} className={"text-lg"} to={page.path}>
+              <RouterLink
+                currentPath={currentPath}
+                key={`${page.path}-${index}`}
+                className={"text-lg"}
+                to={page.path}
+              >
                 {page.title}
               </RouterLink>
             );
